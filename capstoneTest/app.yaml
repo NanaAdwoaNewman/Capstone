@@ -1,0 +1,21 @@
+runtime: php74
+
+runtime_config:
+  document_root: .
+
+handlers:
+# Serve images as static resources.
+- url: /(.+\.(gif|png|jpg|css|js|map|PNG))$
+  static_files: \1
+  upload: .+\.(gif|png|jpg|css|js|map|PNG)$
+
+- url: /.*
+  script: auto
+
+env_variables:
+  # Replace USER, PASSWORD, DATABASE, and CONNECTION_NAME with the
+  # values obtained when configuring your Cloud SQL instance.
+  CLOUDSQL_USER: root
+  CLOUDSQL_DB: capstonetest
+  CLOUDSQL_PASSWORD: KwadwoAnnor
+  CLOUDSQL_DSN: /cloudsql/atlantean-wares-385618:us-central1:non-intrusive-capstone
