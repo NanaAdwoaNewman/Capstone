@@ -1,9 +1,8 @@
 <?php
 
-require "db.php";
+require "connection.php";
 
-//$connection = conectar();
-$connection= mysqli_connect($servername,$username,$password,$dbname);
+$connection = conectar();
 
 $Temperature=$_GET['Temperature'];
 $DeviceID=$_GET['DeviceID'];

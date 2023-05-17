@@ -1,8 +1,8 @@
 <?php
 
-require "db.php";
+require "connection.php";
 
-$con = mysqli_connect($servername,$username,$password,$dbname);
+$connection = conectar();
 
 $EmailAddress=$_GET["EmailAddress"];
 $Pass=$_GET["Pass"];
@@ -10,17 +10,17 @@ $Pass=$_GET["Pass"];
 $sql = "SELECT UserID, FirstName, LastName, Pat_Doc from users where EmailAddress='{$EmailAddress}' and Pass='{$Pass}'";
 
 $data=array();
-$q=mysqli_query($con, $sql);
+$q=mysqli_query($connection, $sql);
 
 $val=mysqli_fetch_object($q);
-echo "{$val->Pat_Doc}";
+// echo "{$val->Pat_Doc}";
 
 if($val->Pat_Doc==1){
-    header("Location: http://192.168.137.1/capstoneTest/PatientDashboard.html?EmailAddress=" . urlencode($EmailAddress) . "&UserID=" . urlencode($val->UserID). "&FirstName=" . urlencode($val->FirstName). "&LastName=" . urlencode($val->LastName));
+    header("Location: https://atlantean-wares-385618.uc.r.appspot.com/PatientDashboard.html?EmailAddress=" . urlencode($EmailAddress) . "&UserID=" . urlencode($val->UserID). "&FirstName=" . urlencode($val->FirstName). "&LastName=" . urlencode($val->LastName));
     exit;
 }
 elseif ($val->Pat_Doc==2){
-    header("Location: http://172.16.4.56/capstoneTest/ListPatients.html?EmailAddress=" . urlencode($EmailAddress) . "&UserID=" . urlencode($val->UserID). "&FirstName=" . urlencode($val->FirstName). "&LastName=" . urlencode($val->LastName));
+    header("Location: https://atlantean-wares-385618.uc.r.appspot.com/ListPatients.html?EmailAddress=" . urlencode($EmailAddress) . "&UserID=" . urlencode($val->UserID). "&FirstName=" . urlencode($val->FirstName). "&LastName=" . urlencode($val->LastName));
     exit;
 }
 else{

@@ -1,10 +1,10 @@
 <?php
-require "db.php";
+    require "connection.php";
 
-    $con = mysqli_connect($servername,$username,$password,$dbname);
+    $connection = conectar();
     $DeviceID=$_GET['DeviceID'];
 
-    $q=mysqli_query($con,"SELECT Prescription from device where DeviceID= {$DeviceID}");
+    $q=mysqli_query($connection,"SELECT Prescription from device where DeviceID= {$DeviceID}");
 
     $row=mysqli_fetch_object($q);  
     echo "{$row->Prescription}"; 

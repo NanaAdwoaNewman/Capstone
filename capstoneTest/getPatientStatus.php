@@ -1,7 +1,7 @@
 <?php
-require "db.php";
+    require "connection.php";
 
-    $con = mysqli_connect($servername,$username,$password,$dbname);
+    $connection = conectar();
 
     $DFirstName=$_GET["FirstName"];
     $DLastName=$_GET["LastName"];
@@ -9,7 +9,7 @@ require "db.php";
     $DUserID=$_GET["UserID"];
 
     $data=array();
-    $q=mysqli_query($con,"SELECT users.UserID, users.FirstName, users.LastName, device.DeviceStatus, device.DeviceID from users inner join device on users.UserID = device.UserID ORDER BY DeviceID DESC");
+    $q=mysqli_query($connection,"SELECT users.UserID, users.FirstName, users.LastName, device.DeviceStatus, device.DeviceID from users inner join device on users.UserID = device.UserID ORDER BY DeviceID DESC");
 
     //echo "table"
     $patList = "<ul class=\"list-style-none feed-body m-0 p-b-20\">";

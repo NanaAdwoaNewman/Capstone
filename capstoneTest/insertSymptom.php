@@ -1,8 +1,8 @@
 <?php
 
-require "db.php";
+require "connection.php";
 
-$con = mysqli_connect($servername,$username,$password,$dbname);
+$connection = conectar();
 
 $Malaise=$_GET['Malaise'];
 $Anorexia=$_GET['Anorexia'];
@@ -16,7 +16,7 @@ $UserID=$_GET['UserID'];
 
 $sql = "UPDATE device set Malaise='{$Malaise}',Anorexia='{$Anorexia}',Lassitude='{$Lassitude}',Dizziness='{$Dizziness}',Myalgias='{$Myalgias}',Nausea='{$Nausea}',Vomiting='{$Vomiting}',Chills='{$Chills}' where UserID='{$UserID}'";
 
-if (mysqli_query($con, $sql)){
+if (mysqli_query($connection, $sql)){
     echo "Symptoms Added";
 }
 else{

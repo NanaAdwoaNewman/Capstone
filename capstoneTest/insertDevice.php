@@ -1,8 +1,8 @@
 <?php
 
-require "db.php";
+require "connection.php";
 
-$con = mysqli_connect($servername,$username,$password,$dbname);
+$connection = conectar();
 
 $DeviceCode=$_GET['DeviceCode'];
 $DeviceName=$_GET['DeviceName'];
@@ -11,7 +11,7 @@ $UserID=$_GET['UserID'];
 
 $sql = "INSERT INTO device (UserID,DeviceCode,DeviceName) VALUES ('{$UserID}','{$DeviceCode}','{$DeviceName}')";
 
-if (mysqli_query($con, $sql)){
+if (mysqli_query($connection, $sql)){
     echo "Device Added";
 }
 else{

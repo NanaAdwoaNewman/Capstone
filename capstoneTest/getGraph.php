@@ -1,30 +1,24 @@
 <?php
+    require "connection.php";
 
-require "db.php";
-
-    $mysqli = new mysqli($servername,$username,$password,$dbname);
+    $connection = conectar();
     $DeviceID=$_GET["DeviceID"];
 
-    if(!$mysqli){
-        die("Connection failed: ".$mysqli->error);
-    }
+    $data=array();
+    $q=mysqli_query($connection,"SELECT Time1, Temperature from fever_readings where DeviceID= '{$DeviceID}' ORDER BY ID DESC LIMIT 48");
 
-    $query=sprintf("SELECT Time1, Temperature from fever_readings where DeviceID= '{$DeviceID}' ORDER BY ID ASC LIMIT 48");
+    $patList = "";
 
-    $result=$mysqli->query($query);
+    $row=mysqli_fetch_object($q);
 
-    $data = array();
-    foreach ($result as $row){
-        $data[] = $row;
-    }
-    $result->close();
-    $mysqli->close();
-    //return json_encode($data);
-    //echo $result
-    echo json_encode($data);
+    while ($row){
+        $patList .= "{$row->Time1},{$row->Temperature}\n";
+        $row=mysqli_fetch_object($q);
+        }  
 
-    $myfile = fopen("newfile.txt", "a") or die("Unable to open file!");
-    fwrite($myfile, json_encode($data));
+    echo $patList; 
+
+    $myfile = fopen("newfile.txt", "w") or die("Unable to open file!");
+    fwrite($myfile, $patList);
     fclose($myfile);
-
 ?>

@@ -1,8 +1,8 @@
 <?php
 
-require "db.php";
+require "connection.php";
 
-$con = mysqli_connect($servername,$username,$password,$dbname);
+$connection = conectar();
 
 $Prescription=$_GET['Prescription'];
 $UserID=$_GET['UserID'];
@@ -10,7 +10,7 @@ $UserID=$_GET['UserID'];
 
 $sql = "UPDATE device set Prescription='{$Prescription}' where UserID = '{$UserID}'";
 
-if (mysqli_query($con, $sql)){
+if (mysqli_query($connection, $sql)){
     echo "Prescription Sent";
 }
 else{

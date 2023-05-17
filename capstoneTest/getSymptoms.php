@@ -1,12 +1,12 @@
 <?php
-require "db.php";
+    require "connection.php";
 
-    $con = mysqli_connect($servername,$username,$password,$dbname);
+    $connection = conectar();
     $DeviceID=$_GET["DeviceID"];
     $not = "not";
 
     $data=array();
-    $q=mysqli_query($con,"SELECT Malaise,Anorexia,Lassitude,Dizziness,Myalgias,Nausea,Vomiting,Chills from device where DeviceID= '{$DeviceID}'");
+    $q=mysqli_query($connection,"SELECT Malaise,Anorexia,Lassitude,Dizziness,Myalgias,Nausea,Vomiting,Chills from device where DeviceID= '{$DeviceID}'");
 
     //echo "table"
     $patList = "<ul>";

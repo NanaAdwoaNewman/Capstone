@@ -1,14 +1,14 @@
 <?php
-require "db.php";
+    require "connection.php";
 
-    $con = mysqli_connect($servername,$username,$password,$dbname);
+    $connection = conectar();
     $UserID=$_GET["UserID"];
     $FirstName=$_GET["FirstName"];
     $LastName=$_GET["LastName"];
     $EmailAddress=$_GET["EmailAddress"];
 
     $data=array();
-    $q=mysqli_query($con,"SELECT device.DeviceID, device.DeviceName, device.DeviceCode from device where device.UserID= '{$UserID}' ORDER BY DeviceID DESC");
+    $q=mysqli_query($connection,"SELECT device.DeviceID, device.DeviceName, device.DeviceCode from device where device.UserID= '{$UserID}' ORDER BY DeviceID DESC");
 
     //echo "table"
     $patList = "<ul class=\"list-style-none feed-body m-0 p-b-20\">";
